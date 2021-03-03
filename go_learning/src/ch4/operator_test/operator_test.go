@@ -48,7 +48,7 @@ bit 位清除
 func TestBitClear(t *testing.T) {
 	//0111
 	var a int = 7
-	a = a &^ EXECUTE
+	a = a &^ 3
 	t.Log(a)
 	t.Log(READER, WRITER, EXECUTE)
 	t.Log(a&READER == READER, a&WRITER == WRITER, a&EXECUTE == EXECUTE)
