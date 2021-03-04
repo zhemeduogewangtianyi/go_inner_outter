@@ -11,6 +11,7 @@ func TestCompareArray(t *testing.T) {
 	//c:=[...]int{1,2,3,4,5}
 	d := [...]int{1, 2, 3, 4}
 
+	//数组比较
 	t.Log(a == b)
 
 	//长度不同会报出长度不同的错误，编译不通过
