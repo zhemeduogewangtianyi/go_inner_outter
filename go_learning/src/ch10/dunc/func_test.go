@@ -3,6 +3,7 @@ package dunc
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 	"testing"
 	"time"
 )
@@ -49,4 +50,75 @@ func TestFn(t *testing.T) {
 	tsSf := timeSpent(slowFun)
 	var result int = tsSf(10)
 	t.Log(result)
+}
+
+func UserLoginInterceptor(inner func(password string) bool) func(password string) bool {
+
+	return func(pwd string) bool {
+		if ok := strings.EqualFold(pwd, "123456"); ok {
+			pwd = "654321"
+			return inner(pwd)
+		} else {
+			return false
+		}
+	}
+
+}
+
+func UserLogin(password string) bool {
+	time.Sleep(time.Second * 3)
+	fmt.Println(password + " 登录成功")
+	return true
+}
+
+func TestUserLogin(t *testing.T) {
+
+	var method func(password string) bool = UserLoginInterceptor(UserLogin)
+	var result bool = method("12345")
+	t.Log(result)
+
+	t.Log(UserLoginInterceptor(UserLogin)("123456"))
+
+}
+
+/**
+可变长参数
+*/
+func Sum(ops ...int) int {
+	var ret int
+	for _, val := range ops {
+		ret += val
+	}
+	return ret
+}
+
+func TestVarParam(t *testing.T) {
+	t.Log(Sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+}
+
+/**
+defer 关键字
+
+	类似于 try catch finally 中的 finally
+
+panic 关键字
+
+	类似于 Exception异常
+*/
+func TestDefer(t *testing.T) {
+
+	defer func() {
+		fmt.Println("defer 1")
+	}()
+
+	fmt.Println("1111111111111111111111111")
+
+	defer TempDeferFn()
+
+	panic("java.lang.Exception")
+
+}
+
+func TempDeferFn() {
+	fmt.Println("defer 2")
 }
