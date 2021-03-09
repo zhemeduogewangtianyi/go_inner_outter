@@ -10,6 +10,7 @@ func TestWhileLoop(t *testing.T) {
 		n++
 	}
 
+	//无限循环
 	for {
 		t.Log(n)
 		n++

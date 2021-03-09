@@ -16,6 +16,7 @@ func TestArrayInit(t *testing.T) {
 	arr1 := [3]int{1, 2, 3}
 	t.Log(arr1[0], arr1[1])
 
+	//不指定数组元素大小
 	arr2 := [...]int{1, 2, 3}
 	t.Log(arr2[0], arr2[1])
 
@@ -89,6 +90,7 @@ func TestArraySecsion(t *testing.T) {
 
 	var arr [5]int = [...]int{1, 2, 3, 4, 5}
 
+	//	[1 : n)
 	arr1 := arr[3:]
 	t.Log(arr1)
 
