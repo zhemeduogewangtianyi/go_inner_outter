@@ -2,19 +2,29 @@ package _interface
 
 import "testing"
 
+/**
+接口和实现类
+*/
 type Programmer interface {
 	WriterHelloWorld() string
 }
 
+/**
+实现类
+*/
 type GoProgrammer struct {
 }
 
-func (programmer *GoProgrammer) WriterHelloWorld() string {
+/**
+绑定方法 DuckType -> 方法签名和返回值一样
+
+*/
+func (goProgrammer *GoProgrammer) WriterHelloWorld() string {
 	return "fmt.Println(\"Hello World\")"
 }
 
-func TestGoInterface(t *testing.T) {
-	var programer Programmer = new(GoProgrammer)
-	var result string = programer.WriterHelloWorld()
-	t.Log(result)
+func TestClient(t *testing.T) {
+	var p Programmer = new(GoProgrammer)
+	var str string = p.WriterHelloWorld()
+	t.Log(str)
 }
