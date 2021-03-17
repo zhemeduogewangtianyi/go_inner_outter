@@ -118,3 +118,26 @@ Buffered Channel
 
 	Buffered Channel 会更高效一点
 */
+/**
+多路选择和超时控制
+
+1：多渠道选择
+	不能依赖 case 的顺序
+	select {
+		case ret := <-retCh1 :
+			t.Logf("result %s \r\n" , ret)
+		case ret := <-retCh2 :
+			t.Logf("result %s \r\n" , ret)
+		default :
+			t.Error("No one returned")
+	}
+
+2：超时控制
+
+	select {
+		case ret := <-retCh :
+			t.Logf("result %s \r\n" , ret)
+		case <-time.After(time.Second * 1) :
+			t.Error("time out")
+	}
+*/
