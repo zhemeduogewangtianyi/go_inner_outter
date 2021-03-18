@@ -46,3 +46,25 @@ func TestFirstResponse(t *testing.T) {
 	t.Log("After", runtime.NumGoroutine())
 
 }
+
+func SecondResponse() string {
+	numOfRunner := 10
+
+	ch := make(chan string)
+
+	for i := 0; i < numOfRunner; i++ {
+		go func(id int) {
+			ch <- runTask(i)
+		}(i)
+	}
+
+	return <-ch
+
+}
+
+func TestSecondResponse(t *testing.T) {
+	t.Log("Before", runtime.NumGoroutine())
+	t.Log(SecondResponse())
+	time.Sleep(1 * time.Second)
+	t.Log("After", runtime.NumGoroutine())
+}
